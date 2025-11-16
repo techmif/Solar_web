@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Sun",
+    "scale": 4.0,
+    "model_name": "sun.glb",
+    "small_info": "The Sun — a G-type main-sequence star at the center of our solar system.",
+    "big_info": "The Sun is a nearly perfect sphere of hot plasma that provides the energy powering the solar system. It is composed mostly of hydrogen and helium and drives solar wind and magnetic activity. In this project, the 'scale' value is a visualization parameter, not an exact physical measurement."
+  },
+  {
+    "name": "Mercury",
+    "scale": 0.383,
+    "model_name": "mercury.glb",
+    "small_info": "Mercury — the smallest, innermost planet.",
+    "big_info": "Mercury orbits closest to the Sun and has a heavily cratered, rocky surface. It has a very thin exosphere and experiences extreme temperature variations. The 'scale' here is an arbitrary factor for rendering size in scenes."
+  },
+  {
+    "name": "Venus",
+    "scale": 0.949,
+    "model_name": "venus.glb",
+    "small_info": "Venus — similar in size to Earth, with a dense atmosphere.",
+    "big_info": "Venus has a thick, carbon-dioxide-rich atmosphere that creates a runaway greenhouse effect and extremely high surface temperatures. Its surface features include volcanoes and plains. Use the 'scale' value for modeling and visualization only."
+  },
+  {
+    "name": "Earth",
+    "scale": 1.0,
+    "model_name": "earth.glb",
+    "small_info": "Earth — our home planet, with liquid water and life.",
+    "big_info": "Earth has a nitrogen-oxygen atmosphere, surface water, and diverse life forms. Its magnetic field and atmosphere protect life from solar radiation. The provided 'scale' equals 1.0 as a baseline reference for other bodies."
+  },
+  {
+    "name": "Mars",
+    "scale": 0.532,
+    "model_name": "mars.glb",
+    "small_info": "Mars — the red planet, a rocky world with dry valleys.",
+    "big_info": "Mars features the largest volcano in the solar system and a thin atmosphere mostly of carbon dioxide. Evidence suggests it once had liquid water on its surface. The 'scale' is meant for render sizing rather than scientific precision."
+  },
+  {
+    "name": "Jupiter",
+    "scale": 11.21,
+    "model_name": "jupiter.glb",
+    "small_info": "Jupiter — the largest gas giant in our solar system.",
+    "big_info": "Jupiter is a massive gas giant with strong storms, including the Great Red Spot. It has dozens of moons and a faint ring system. Use the large 'scale' value to reflect its prominence in visualizations."
+  },
+  {
+    "name": "Saturn",
+    "scale": 9.45,
+    "model_name": "saturn.glb",
+    "small_info": "Saturn — famous for its extensive ring system.",
+    "big_info": "Saturn is a gas giant with wide, bright rings made of ice and rock particles. It has many moons and a low average density. The 'scale' is an arbitrary display size for models."
+  },
+  {
+    "name": "Uranus",
+    "scale": 4.0,
+    "model_name": "uranus.glb",
+    "small_info": "Uranus — an ice giant with a tilted rotation axis.",
+    "big_info": "Uranus is an ice giant with a blue-green color from methane in the atmosphere and rotates on its side relative to its orbit. It hosts a set of faint rings and many moons. 'Scale' here is for visualization."
+  },
+  {
+    "name": "Neptune",
+    "scale": 3.88,
+    "model_name": "neptune.glb",
+    "small_info": "Neptune — the outermost known giant planet, windy and blue.",
+    "big_info": "Neptune is a dynamic ice giant with strong winds and large storms. It has several moons and faint rings. The 'scale' value is a relative visualization parameter."
+  }
+]
