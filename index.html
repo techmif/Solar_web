@@ -14,11 +14,6 @@
 		</header>
 
 		<main>
-			<section>
-				<h2>Getting started</h2>
-				<p>Open this file in your browser or continue editing <code>index.html</code>, <code>index.css</code> and <code>main.js</code>.</p>
-			</section>
-
 			<section id="planet-view" aria-label="Planet viewer">
 				<h2>Planet viewer</h2>
 				<div id="planet-controls" style="margin-bottom:12px;">
@@ -29,10 +24,32 @@
 				<div id="planet-info">
 					<p>Planet data will appear here after loading.</p>
 				</div>
+				<!-- 3D canvas will be inserted here by Three.js helper -->
+				<div id="three-container" style="width:100%;height:360px;margin-top:12px;"></div>
 			</section>
 		</main>
 
-		<script src="main.js" defer></script>
+			<!-- Import map to resolve bare-module specifier 'three' for example loaders -->
+			<script type="importmap">
+			{
+				"imports": {
+					"three": "https://unpkg.com/three@0.155.0/build/three.module.js"
+				}
+			}
+			</script>
+			<!-- Load Three.js and example loaders as ES modules, then expose globals for legacy scripts -->
+			<script type="module">
+				import * as THREE from 'three';
+				import { FBXLoader } from 'https://unpkg.com/three@0.155.0/examples/jsm/loaders/FBXLoader.js';
+				import { GLTFLoader } from 'https://unpkg.com/three@0.155.0/examples/jsm/loaders/GLTFLoader.js';
+				// expose to window for non-module scripts (3dfunctions.js, main.js)
+				window.THREE = THREE;
+				window.FBXLoader = FBXLoader;
+				window.GLTFLoader = GLTFLoader;
+			</script>
+			<!-- small 3D helper that uses global THREE -->
+			<script src="assets/src/3dfunctions.js" defer></script>
+			<script src="main.js" defer></script>
 	</body>
 </html>
 

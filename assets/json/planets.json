@@ -23,7 +23,10 @@
   {
     "name": "Earth",
     "scale": 1.0,
-    "model_name": "earth.glb",
+    "model_name": "psx-earth.fbx",
+    "model_path": "assets/models/psx-earth/source/PSX Earth.fbx",
+    "texture": "assets/models/psx-earth/textures/eatrth.png",
+    "model_scale": 0.01,
     "small_info": "Earth — our home planet, with liquid water and life.",
     "big_info": "Earth has a nitrogen-oxygen atmosphere, surface water, and diverse life forms. Its magnetic field and atmosphere protect life from solar radiation. The provided 'scale' equals 1.0 as a baseline reference for other bodies."
   },

@@ -69,20 +69,46 @@ function renderPlanet(index) {
 	const p = planets[i];
 	window.planetsIndex = i;
 
-	// Build a simple list of properties
+	// show basic text info (name + small_info) and prefer model view if model_path is available
 	let html = '';
 	html += `<h3>${_escapeHtml(p.name || 'Unnamed')}</h3>`;
-	html += '<ul>';
-	for (const key of Object.keys(p)) {
-		const val = p[key];
-		// show objects/arrays as JSON
-		const display = (typeof val === 'object') ? _escapeHtml(JSON.stringify(val)) : _escapeHtml(String(val));
-		html += `<li><strong>${_escapeHtml(key)}:</strong> ${display}</li>`;
-	}
-	html += '</ul>';
+	if (p.small_info) html += `<p>${_escapeHtml(p.small_info)}</p>`;
 
 	infoEl.innerHTML = html;
+
 	if (idxEl) idxEl.textContent = `${i} / ${planets.length - 1}`;
+
+	// If a model_path (or model_name with model_path) is specified, initialize Three and load model
+	const modelPath = p.model_path || null;
+	const texturePath = p.texture || null;
+	const modelScale = p.model_scale || (p.scale ? p.scale : 1);
+
+	if (modelPath) {
+		// initialize three once
+		if (!window.threeApp) {
+			// initThree should be provided by assets/src/3dfunctions.js
+			if (typeof window.initThree !== 'function') {
+				console.error('initThree not available; ensure assets/src/3dfunctions.js is loaded');
+			} else {
+				window.threeApp = window.initThree('#three-container', { cameraZ: 4, rotationSpeed: 0.006 });
+			}
+		}
+
+		if (window.threeApp && typeof window.threeApp.loadModel === 'function') {
+			// load model (catch errors so UI doesn't break)
+			window.threeApp.loadModel(modelPath, texturePath, { scale: modelScale }).then((obj) => {
+				console.log('Loaded model for', p.name, obj);
+			}).catch((err) => {
+				console.error('Model load failed for', p.name, modelPath, err);
+			});
+		}
+	} else {
+		// no model for this planet: ensure placeholder sphere exists and threeApp not running
+		if (window.threeApp && window.threeApp.stop) {
+			window.threeApp.stop();
+			window.threeApp = null;
+		}
+	}
 }
 
 function changeIndex(delta) {
