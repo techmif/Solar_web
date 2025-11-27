@@ -168,3 +168,50 @@ main#planet-view {
 		gap: 8px;
 	}
 }
+
+/* Mini alert near the planet canvas to suggest interactions (rotate / zoom) */
+.mini-alert {
+	position: absolute;
+	/* offset to the right by 20% of the container width */
+	left: calc(50% + 20%);
+	top: 44%; /* near the center where the planet typically appears */
+	transform: translate(-50%, -50%);
+	z-index: 3;
+	background: rgba(0,0,0,0.6);
+	color: #fff;
+	padding: 0.45rem 0.9rem;
+	border-radius: 999px;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.95rem;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+	backdrop-filter: blur(6px);
+	transition: opacity 260ms ease, transform 260ms ease;
+	opacity: 1;
+	pointer-events: auto;
+}
+.mini-alert .mini-alert-text {
+	line-height: 1;
+}
+.mini-alert .mini-alert-close {
+	background: transparent;
+	border: none;
+	color: #fff;
+	font-size: 1rem;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0.15rem 0.35rem;
+	border-radius: 6px;
+}
+.mini-alert-hidden {
+	opacity: 0 !important;
+	transform: translate(-50%, -46%) scale(0.96) !important;
+	pointer-events: none !important;
+}
+
+@media (max-width: 600px) {
+	.mini-alert { font-size: 0.9rem; top: 42%; }
+	/* avoid pushing alert off-screen on very small devices: reduce offset */
+	.mini-alert { left: calc(50% + 6%); }
+}

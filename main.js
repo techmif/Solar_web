@@ -179,5 +179,42 @@ document.addEventListener('DOMContentLoaded', () => {
 		const mo = new MutationObserver(() => { setTimeout(updateMask, 30); });
 		mo.observe(infoEl, { childList: true, subtree: true, characterData: true });
 	}
+
+	// Mini alert: suggest interacting (rotate/zoom) near the planet model
+	(function setupMiniAlert(){
+		const mini = document.getElementById('mini-alert');
+		if (!mini) return;
+		const closeBtn = mini.querySelector('.mini-alert-close');
+		let hideTimeout = null;
+
+		// start hidden so we can reveal the tip with a visible delay
+		mini.classList.add('mini-alert-hidden');
+
+		function hideMini(now = false){
+			mini.classList.add('mini-alert-hidden');
+			mini.setAttribute('aria-hidden', 'true');
+			if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+		}
+
+		function showMini(){
+			mini.classList.remove('mini-alert-hidden');
+			mini.setAttribute('aria-hidden', 'false');
+			if (hideTimeout) clearTimeout(hideTimeout);
+			hideTimeout = setTimeout(() => hideMini(), 6000);
+		}
+
+		// show after a short delay so it doesn't flash immediately
+		setTimeout(showMini, 1200);
+
+		// hide on user interactions focused on the 3D area
+		const threeContainer = document.getElementById('three-container');
+		if (threeContainer) {
+			['pointerdown','wheel','touchstart'].forEach(ev => {
+				threeContainer.addEventListener(ev, function onFirst(){ hideMini(); threeContainer.removeEventListener(ev, onFirst); }, { passive: true });
+			});
+		}
+
+		if (closeBtn) closeBtn.addEventListener('click', hideMini);
+	})();
 });
 

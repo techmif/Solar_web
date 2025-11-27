@@ -10,12 +10,18 @@
 	<body>
 
 		<main id="planet-view" aria-label="Planet viewer">
-			<h2 class="visually-hidden">Planet viewer</h2>
+			<h2 class="visually-hidden">Planet viewer</h2>a
 			<div id="planet-info">
 				<p>Planet data will appear here after loading.</p>
 			</div>
 			<!-- 3D canvas will be inserted here by Three.js helper -->
 			<div id="three-container"></div>
+
+			<!-- Mini alert placed near the planet model to suggest interactions -->
+			<div id="mini-alert" class="mini-alert" role="status" aria-live="polite" aria-hidden="false">
+				<span class="mini-alert-text">Tip: try rotating or zooming the planet</span>
+				<button type="button" class="mini-alert-close" aria-label="Dismiss">✕</button>
+			</div>
 			<div id="planet-controls">
 				<button id="prevBtn" class="nav-btn" type="button" aria-label="Previous">
 					<img src="assets/images/rodykle%20kaireni.png" alt="Previous" class="nav-arrow">
