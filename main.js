@@ -58,7 +58,7 @@ function renderPlanet(index) {
 	const planets = window.planets || [];
 	if (!planets.length) {
 		infoEl.innerHTML = '<p>No planet data available.</p>';
-		if (idxEl) idxEl.textContent = '0 / 0';
+		console.log('planet index: 0 / 0');
 		return;
 	}
 
@@ -72,34 +72,61 @@ function renderPlanet(index) {
 	// show basic text info (name + small_info) and prefer model view if model_path is available
 	let html = '';
 	html += `<h3>${_escapeHtml(p.name || 'Unnamed')}</h3>`;
-	if (p.small_info) html += `<p>${_escapeHtml(p.small_info)}</p>`;
+	// show only the 'big_info' field as requested
+	if (p.big_info) {
+		if (Array.isArray(p.big_info)) {
+			html += p.big_info.map(s => `<p>${_escapeHtml(s)}</p>`).join('');
+		} else {
+			html += `<p>${_escapeHtml(p.big_info)}</p>`;
+		}
+	}
 
 	infoEl.innerHTML = html;
 
-	if (idxEl) idxEl.textContent = `${i} / ${planets.length - 1}`;
+	console.log(`planet index: ${i} / ${planets.length - 1}`);
 
 	// If a model_path (or model_name with model_path) is specified, initialize Three and load model
 	const modelPath = p.model_path || null;
 	const texturePath = p.texture || null;
-	const modelScale = p.model_scale || (p.scale ? p.scale : 1);
 
 	if (modelPath) {
-		// initialize three once
+		// initialize three once; use a very slow default rotation
 		if (!window.threeApp) {
-			// initThree should be provided by assets/src/3dfunctions.js
 			if (typeof window.initThree !== 'function') {
 				console.error('initThree not available; ensure assets/src/3dfunctions.js is loaded');
 			} else {
-				window.threeApp = window.initThree('#three-container', { cameraZ: 4, rotationSpeed: 0.006 });
+				window.threeApp = window.initThree('#three-container', { cameraZ: 4, rotationSpeed: 0.001 });
 			}
 		}
 
 		if (window.threeApp && typeof window.threeApp.loadModel === 'function') {
-			// load model (catch errors so UI doesn't break)
-			window.threeApp.loadModel(modelPath, texturePath, { scale: modelScale }).then((obj) => {
+			// load model (catch errors so UI doesn't break). No automatic scaling is passed.
+			window.threeApp.loadModel(modelPath, texturePath).then((obj) => {
 				console.log('Loaded model for', p.name, obj);
+				// position model and text based on index parity: even -> left text, odd -> right text
+				try {
+					const side = (i % 2 === 0) ? 'left' : 'right';
+					// set text position class
+					const infoEl = document.getElementById('planet-info');
+					if (infoEl) {
+						infoEl.classList.remove('info-left', 'info-right');
+						infoEl.classList.add(side === 'left' ? 'info-left' : 'info-right');
+					}
+					// set 3D model side if supported
+					if (window.threeApp && typeof window.threeApp.setModelSide === 'function') {
+						window.threeApp.setModelSide(side === 'left' ? 'right' : 'left');
+						// note: we invert here so that text on left -> model appears to the right side (around 66%) and vice versa
+					}
+				} catch (e) { console.warn('Could not set model side', e); }
 			}).catch((err) => {
 				console.error('Model load failed for', p.name, modelPath, err);
+				// show human-readable error in the UI and keep the placeholder model visible
+				const infoEl = document.getElementById('planet-info');
+				if (infoEl) {
+					const errText = `<p style="color:var(--error-color,#c00);">Model load failed: ${_escapeHtml(err && err.message ? err.message : String(err))}</p>`;
+					const advise = `<p>Try converting the FBX to glTF (.glb) or check the model file for compatibility. I can help convert it if you want.</p>`;
+					infoEl.innerHTML = (infoEl.innerHTML || '') + errText + advise;
+				}
 			});
 		}
 	} else {
@@ -133,5 +160,24 @@ document.addEventListener('DOMContentLoaded', () => {
 	loadPlanets().then(({ planets, selectedIndex }) => {
 		renderPlanet(selectedIndex);
 	});
+
+	// Apply mask toggle: remove text-mask when scrolled to bottom so final lines are fully visible
+	const infoEl = document.getElementById('planet-info');
+	if (infoEl) {
+		function updateMask() {
+			// consider near-bottom (2% or 2px tolerance) as bottom to account for fractional pixels
+			const scrollPos = infoEl.scrollTop + infoEl.clientHeight;
+			const tolerance = Math.max(2, infoEl.scrollHeight * 0.02); // 2px or 2% of total height
+			const atBottom = scrollPos >= (infoEl.scrollHeight - tolerance);
+			if (atBottom) infoEl.classList.add('no-mask');
+			else infoEl.classList.remove('no-mask');
+		}
+		// initial check
+		updateMask();
+		// listen for scroll and for content changes (simple MutationObserver)
+		infoEl.addEventListener('scroll', updateMask, { passive: true });
+		const mo = new MutationObserver(() => { setTimeout(updateMask, 30); });
+		mo.observe(infoEl, { childList: true, subtree: true, characterData: true });
+	}
 });
 

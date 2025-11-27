@@ -1,68 +1,33 @@
 [
   {
-    "name": "Sun",
-    "scale": 4.0,
-    "model_name": "sun.glb",
-    "small_info": "The Sun — a G-type main-sequence star at the center of our solar system.",
-    "big_info": "The Sun is a nearly perfect sphere of hot plasma that provides the energy powering the solar system. It is composed mostly of hydrogen and helium and drives solar wind and magnetic activity. In this project, the 'scale' value is a visualization parameter, not an exact physical measurement."
-  },
-  {
-    "name": "Mercury",
-    "scale": 0.383,
-    "model_name": "mercury.glb",
-    "small_info": "Mercury — the smallest, innermost planet.",
-    "big_info": "Mercury orbits closest to the Sun and has a heavily cratered, rocky surface. It has a very thin exosphere and experiences extreme temperature variations. The 'scale' here is an arbitrary factor for rendering size in scenes."
-  },
-  {
-    "name": "Venus",
-    "scale": 0.949,
-    "model_name": "venus.glb",
-    "small_info": "Venus — similar in size to Earth, with a dense atmosphere.",
-    "big_info": "Venus has a thick, carbon-dioxide-rich atmosphere that creates a runaway greenhouse effect and extremely high surface temperatures. Its surface features include volcanoes and plains. Use the 'scale' value for modeling and visualization only."
-  },
-  {
     "name": "Earth",
     "scale": 1.0,
     "model_name": "psx-earth.fbx",
     "model_path": "assets/models/psx-earth/source/PSX Earth.fbx",
     "texture": "assets/models/psx-earth/textures/eatrth.png",
-    "model_scale": 0.01,
     "small_info": "Earth — our home planet, with liquid water and life.",
-    "big_info": "Earth has a nitrogen-oxygen atmosphere, surface water, and diverse life forms. Its magnetic field and atmosphere protect life from solar radiation. The provided 'scale' equals 1.0 as a baseline reference for other bodies."
+    "big_info": [
+      "Earth is the third planet from the Sun and the only astronomical object known to harbor life. This is enabled by Earth being an ocean world, the only one in the Solar System sustaining liquid surface water.",
+      "Almost all of Earth's water is contained in its global ocean, covering 70.8% of Earth's crust. The remaining 29.2% of Earth's crust is land, most of which is located in the form of continental landmasses within Earth's land hemisphere.",
+      "Earth's crust consists of slowly moving tectonic plates, which interact to produce mountain ranges, volcanoes, and earthquakes. Earth has a liquid outer core that generates a magnetosphere capable of deflecting most solar wind and cosmic radiation.",
+      "Earth has a dynamic atmosphere composed primarily of nitrogen and oxygen. Water vapor is widely present, forming clouds that cover much of the planet and acting as a greenhouse gas together with CO2 to help maintain liquid surface water and a temperate climate.",
+      "Earth is rounded into an ellipsoid with a circumference of about 40,000 kilometres (24,900 miles). It is the densest planet in the Solar System and, of the four rocky planets, the largest and most massive.",
+      "Earth orbits the Sun at about 1 AU and completes a revolution in ~365.25 days; it rotates around its axis in approximately 23 hours 56 minutes. The Moon is Earth's natural satellite and plays a role in tides and stabilizing Earth's axial tilt.",
+      "Life emerged and evolved on Earth over billions of years; humans appeared roughly 300,000 years ago and now significantly impact the planet's environment and climate. Humanity's current impact on Earth's biosphere is a major concern for long-term sustainability."
+    ]
   },
   {
     "name": "Mars",
     "scale": 0.532,
-    "model_name": "mars.glb",
+    "model_name": "mars.fbx",
+    "model_path": "assets/models/mars/source/mars.fbx",
+    "texture": "assets/models/mars/textures/mars tsx.png",
     "small_info": "Mars — the red planet, a rocky world with dry valleys.",
-    "big_info": "Mars features the largest volcano in the solar system and a thin atmosphere mostly of carbon dioxide. Evidence suggests it once had liquid water on its surface. The 'scale' is meant for render sizing rather than scientific precision."
-  },
-  {
-    "name": "Jupiter",
-    "scale": 11.21,
-    "model_name": "jupiter.glb",
-    "small_info": "Jupiter — the largest gas giant in our solar system.",
-    "big_info": "Jupiter is a massive gas giant with strong storms, including the Great Red Spot. It has dozens of moons and a faint ring system. Use the large 'scale' value to reflect its prominence in visualizations."
-  },
-  {
-    "name": "Saturn",
-    "scale": 9.45,
-    "model_name": "saturn.glb",
-    "small_info": "Saturn — famous for its extensive ring system.",
-    "big_info": "Saturn is a gas giant with wide, bright rings made of ice and rock particles. It has many moons and a low average density. The 'scale' is an arbitrary display size for models."
-  },
-  {
-    "name": "Uranus",
-    "scale": 4.0,
-    "model_name": "uranus.glb",
-    "small_info": "Uranus — an ice giant with a tilted rotation axis.",
-    "big_info": "Uranus is an ice giant with a blue-green color from methane in the atmosphere and rotates on its side relative to its orbit. It hosts a set of faint rings and many moons. 'Scale' here is for visualization."
-  },
-  {
-    "name": "Neptune",
-    "scale": 3.88,
-    "model_name": "neptune.glb",
-    "small_info": "Neptune — the outermost known giant planet, windy and blue.",
-    "big_info": "Neptune is a dynamic ice giant with strong winds and large storms. It has several moons and faint rings. The 'scale' value is a relative visualization parameter."
+    "big_info": [
+      "Mars is the fourth planet from the Sun. It is also known as the \"Red Planet\", for its orange-red appearance.[22][23] Mars is a desert-like rocky planet with a tenuous atmosphere that is primarily carbon dioxide (CO2). At the average surface level the atmospheric pressure is a few thousandths of Earth's, atmospheric temperature ranges from −153 to 20 °C (−243 to 68 °F),[24] and cosmic radiation is high. Mars retains some water, in the ground as well as thinly in the atmosphere, forming cirrus clouds, fog, frost, larger polar regions of permafrost and ice caps (with seasonal CO2 snow), but no bodies of liquid surface water. Its surface gravity is roughly a third of Earth's or double that of the Moon. Its diameter, 6,779 km (4,212 mi), is about half the Earth's, or twice the Moon's, and its surface area is the size of all the dry land of Earth.",
+      "Fine dust is prevalent across the surface and the atmosphere, being picked up and spread at the low Martian gravity even by the weak wind of the tenuous atmosphere. The terrain of Mars roughly follows a north-south divide, the Martian dichotomy, with the northern hemisphere mainly consisting of relatively flat, low lying plains, and the southern hemisphere of cratered highlands. Geologically, the planet is fairly active with marsquakes trembling underneath the ground, but also hosts many enormous volcanoes that are extinct (the tallest is Olympus Mons, 21.9 km or 13.6 mi tall), as well as one of the largest canyons in the Solar System (Valles Marineris, 4,000 km or 2,500 mi long). Mars has two natural satellites that are small and irregular in shape: Phobos and Deimos. With a significant axial tilt of 25 degrees, Mars experiences seasons, like Earth (which has an axial tilt of 23.5 degrees). A Martian solar year is equal to 1.88 Earth years (687 Earth days), a Martian solar day (sol) is equal to 24.6 hours.",
+      "Mars formed along with the other planets approximately 4.5 billion years ago. During the martian Noachian period (4.5 to 3.5 billion years ago), its surface was marked by meteor impacts, valley formation, erosion, the possible presence of water oceans and the loss of its magnetosphere. The Hesperian period (beginning 3.5 billion years ago and ending 3.3–2.9 billion years ago) was dominated by widespread volcanic activity and flooding that carved immense outflow channels. The Amazonian period, which continues to the present, is the currently dominating and remaining influence on geological processes. Because of Mars's geological history, the possibility of past or present life on Mars remains an area of active scientific investigation, with some possible traces needing further examination.",
+      "Being visible with the naked eye in Earth's sky as a red wandering star, Mars has been observed throughout history, acquiring diverse associations in different cultures. In 1963 the first flight to Mars took place with Mars 1, but communication was lost en route. The first successful flyby exploration of Mars was conducted in 1965 with Mariner 4. In 1971 Mariner 9 entered orbit around Mars, being the first spacecraft to orbit any body other than the Moon, Sun or Earth; following in the same year were the first uncontrolled impact (Mars 2) and first successful landing (Mars 3) on Mars. Probes have been active on Mars continuously since 1997. At times, more than ten probes have simultaneously operated in orbit or on the surface, more than at any other planet beyond Earth. Mars is an often proposed target for future crewed exploration missions, though no such mission is currently planned."
+    ]
   }
 ]

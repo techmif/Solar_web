@@ -1,0 +1,170 @@
+/* Basic reset and layout */
+html, body {
+	height: 100%;
+	margin: 0;
+}
+body {
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #0b0b0b;
+	color: #eaeaea;
+}
+
+/* Planet viewer becomes the main visual focus */
+main#planet-view {
+	width: 95vw;
+	height: 95vh;
+	box-sizing: border-box;
+	background: none; /* invisible background as requested */
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 14px;
+	border-radius: 6px;
+	position: relative; /* make overlays and canvas position relative to this container */
+}
+
+/* Controls and info */
+#planet-controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+}
+
+#planet-index {
+	min-width: 56px;
+	text-align: center;
+}
+
+/* hide the visible planet index; we log it to the console instead */
+#planet-index { display: none !important; }
+
+/* 3D canvas container is placed absolutely to fill the whole viewer
+	 so text overlays don't push it down. Canvas stays behind overlays. */
+#three-container {
+	position: absolute;
+	inset: 0; /* top:0; right:0; bottom:0; left:0 */
+	width: 100%;
+	height: 100%;
+	background: none; /* ensure invisible background */
+	z-index: 0;
+}
+
+/* Overlayed controls and info sit on top of the canvas */
+#planet-controls {
+	position: absolute;
+	bottom: 12px; /* moved to bottom so controls appear under the planet */
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	pointer-events: auto;
+}
+
+/* Nav buttons that use imported arrow images */
+.nav-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+    padding-right: 20vw;
+    padding-left: 20vw; 
+}
+.nav-btn:active { transform: translateY(1px); }
+.nav-btn .nav-arrow {
+	width: 28px;
+	display: inline-block;
+}
+.nav-btn .label {
+	margin-left: 6px;
+	font-size: 0.95rem;
+}
+
+/* If you prefer only the icon visible, the user can hide the label via CSS or replace the image path. */
+
+
+#planet-info {
+	position: absolute;
+	/* inset 1rem from canvas borders */
+	top: 1rem;
+	bottom: 1rem;
+	z-index: 2;
+	/* allow the text container to extend further down the viewer; fill available height */
+	max-height: calc(100% - 6rem);
+	max-width: 42%;
+	overflow: auto;
+	font-size: 1.42rem;
+	line-height: 1.45;
+	background: transparent; /* keep text area background invisible */
+	color: #fff;
+	text-shadow: 0 1px 4px rgba(0,0,0,0.95); /* improve readability over canvas */
+	pointer-events: auto;
+	padding: 0 1rem; /* small inner padding for readability */
+}
+
+/* Hide native scrollbar visuals but keep scrolling behaviour */
+#planet-info {
+	/* Firefox */
+	scrollbar-width: none; /* hides the scrollbar track/thumb */
+	/* IE 10+ */
+	-ms-overflow-style: none;
+}
+#planet-info::-webkit-scrollbar {
+	width: 0; /* remove scrollbar width for WebKit browsers */
+	height: 0;
+}
+#planet-info::-webkit-scrollbar-track { background: transparent; }
+#planet-info::-webkit-scrollbar-thumb { background: transparent; }
+
+/* Use a mask so the text itself fades toward the bottom. This mask
+	 is removed when the user scrolls to the end (see main.js scroll handler).
+	 Using both -webkit-mask-image and mask-image for broader support. */
+#planet-info {
+	-webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.35) 85%, rgba(0,0,0,0) 100%);
+	mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.35) 85%, rgba(0,0,0,0) 100%);
+	-webkit-mask-size: 100% 100%;
+	mask-size: 100% 100%;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+}
+
+/* When scrolled to bottom, disable the mask so the final lines show fully */
+.no-mask {
+	-webkit-mask-image: none !important;
+	mask-image: none !important;
+}
+
+/* place info on left or right side; text aligns accordingly */
+.info-left { left: 1rem; right: auto; text-align: left; }
+.info-right { right: 1rem; left: auto; text-align: right; }
+
+/* Accessibility helper */
+.visually-hidden {
+	position: absolute !important;
+	height: 1px; width: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	white-space: nowrap;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 600px) {
+	main#planet-view {
+		width: 96vw;
+		height: 84vh;
+		padding: 10px;
+	}
+	/* ensure controls remain visible on small screens */
+	#planet-controls {
+		bottom: 8px;
+		gap: 8px;
+	}
+}
