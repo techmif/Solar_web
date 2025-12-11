@@ -88,6 +88,14 @@ main#planet-view {
 	font-size: 0.95rem;
 }
 
+/* Menu icon between navigation buttons */
+.menu-icon {
+	width: 32px;
+	height: auto;
+	display: inline-block;
+	cursor: pointer;
+}
+
 /* If you prefer only the icon visible, the user can hide the label via CSS or replace the image path. */
 
 
@@ -220,4 +228,105 @@ main#planet-view {
 	.mini-alert { font-size: 0.9rem; top: 42%; }
 	/* avoid pushing alert off-screen on very small devices: reduce offset */
 	.mini-alert { left: calc(50% + 6%); }
+}
+
+/* Planet menu overlay */
+.planet-menu {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	background: rgba(11, 11, 11, 0.95);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 12px;
+	padding: 1.5rem;
+	min-width: 280px;
+	max-width: 90vw;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+	transition: opacity 300ms ease, transform 300ms ease;
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.planet-menu.hidden {
+	opacity: 0;
+	transform: translate(-50%, -48%) scale(0.95);
+	pointer-events: none;
+}
+
+.planet-menu-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	padding-bottom: 0.75rem;
+}
+
+.planet-menu-header h3 {
+	margin: 0;
+	color: #fff;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.menu-close {
+	background: transparent;
+	border: none;
+	color: #fff;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	border-radius: 6px;
+	transition: background 150ms ease;
+}
+
+.menu-close:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.planet-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.planet-list li {
+	margin: 0;
+}
+
+.planet-list a {
+	display: block;
+	color: #eaeaea;
+	text-decoration: none;
+	padding: 0.75rem 1rem;
+	border-radius: 8px;
+	transition: background 150ms ease, color 150ms ease;
+	font-size: 1.05rem;
+}
+
+.planet-list a:hover {
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+}
+
+.planet-list a:active {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 600px) {
+	.planet-menu {
+		min-width: 240px;
+		padding: 1.25rem;
+	}
+	.planet-list a {
+		font-size: 1rem;
+		padding: 0.65rem 0.85rem;
+	}
 }

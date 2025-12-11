@@ -216,5 +216,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		if (closeBtn) closeBtn.addEventListener('click', hideMini);
 	})();
+
+	// Planet menu: open on menu icon click, close on X or link click
+	(function setupPlanetMenu(){
+		const menuIcon = document.getElementById('menu-icon');
+		const menu = document.getElementById('planet-menu');
+		if (!menuIcon || !menu) return;
+
+		const closeBtn = menu.querySelector('.menu-close');
+		const links = menu.querySelectorAll('.planet-list a');
+
+		function openMenu() {
+			menu.classList.remove('hidden');
+			menu.setAttribute('aria-hidden', 'false');
+		}
+
+		function closeMenu() {
+			menu.classList.add('hidden');
+			menu.setAttribute('aria-hidden', 'true');
+		}
+
+		menuIcon.addEventListener('click', openMenu);
+		if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+		// close menu and navigate to planet when link is clicked
+		links.forEach(link => {
+			link.addEventListener('click', (e) => {
+				e.preventDefault();
+				const planetIndex = parseInt(link.getAttribute('data-planet'), 10);
+				if (!isNaN(planetIndex)) {
+					closeMenu();
+					// navigate to the planet if it exists in our data
+					const planets = window.planets || [];
+					if (planetIndex >= 0 && planetIndex < planets.length) {
+						window.planetsIndex = planetIndex;
+						renderPlanet(planetIndex);
+					} else {
+						console.log(`Planet index ${planetIndex} not yet available in data`);
+					}
+				}
+			});
+		});
+	})();
 });
 
