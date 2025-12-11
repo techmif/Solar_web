@@ -110,19 +110,25 @@ main#planet-view {
 	padding: 0 1rem; /* small inner padding for readability */
 }
 
-/* Hide native scrollbar visuals but keep scrolling behaviour */
+/* Custom dark scrollbar for planet-info */
 #planet-info {
-	/* Firefox */
-	scrollbar-width: none; /* hides the scrollbar track/thumb */
-	/* IE 10+ */
-	-ms-overflow-style: none;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255,255,255,0.2) rgba(0,0,0,0.3);
 }
 #planet-info::-webkit-scrollbar {
-	width: 0; /* remove scrollbar width for WebKit browsers */
-	height: 0;
+	width: 8px;
 }
-#planet-info::-webkit-scrollbar-track { background: transparent; }
-#planet-info::-webkit-scrollbar-thumb { background: transparent; }
+#planet-info::-webkit-scrollbar-track {
+	background: rgba(0,0,0,0.3);
+	border-radius: 4px;
+}
+#planet-info::-webkit-scrollbar-thumb {
+	background: rgba(255,255,255,0.2);
+	border-radius: 4px;
+}
+#planet-info::-webkit-scrollbar-thumb:hover {
+	background: rgba(255,255,255,0.3);
+}
 
 /* Use a mask so the text itself fades toward the bottom. This mask
 	 is removed when the user scrolls to the end (see main.js scroll handler).
